@@ -1,0 +1,13 @@
+version: "3.8"
+services:
+  watchtower:
+    restart: unless-stopped
+    ports: []
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment: []
+    networks: []
+    depends_on: []
+    image: containrrr/watchtower
+networks: {}
