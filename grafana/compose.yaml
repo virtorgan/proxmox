@@ -1,0 +1,18 @@
+version: "3.8"
+services:
+  grafana:
+    restart: unless-stopped
+    user: "0"
+    env_file:
+      - ./grafana.env
+    ports:
+      - 3002:3000
+    volumes:
+      - ./volume/data:/var/lib/grafana
+      - ./volume/log:/var/log/grafana
+      - ./grafana.ini:/etc/grafana/grafana.ini
+    environment: []
+    networks: []
+    depends_on: []
+    image: grafana/grafana
+networks: {}
