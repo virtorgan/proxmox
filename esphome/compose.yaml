@@ -1,0 +1,17 @@
+version: "3.8"
+services:
+  esphome:
+    container_name: esphome
+    image: esphome/esphome
+    #image: esphome/esphome:dev
+    # devices:
+    #   - /dev/ttyUSB0:/dev/ttyUSB0
+    # network_mode: host
+    ports:
+      - 6052:6052
+      # - 6123:6123
+    restart: unless-stopped
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./volume:/config
+networks: {}
