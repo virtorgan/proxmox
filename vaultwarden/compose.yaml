@@ -1,0 +1,20 @@
+version: "3.8"
+services:
+  Vaultwarden:
+    image: ghcr.io/dani-garcia/vaultwarden:latest
+    environment:
+      # DOMAIN: https://vaultwarden.danielpires.fr
+      LOG_FILE: /data/log/vaultwarden.log
+    # LOG_LEVEL: warn
+    # ROCKET_CLI_COLORS: off
+    # EXTENDED_LOGGING: "true"
+    # IP_HEADER: X-Forwarded-For
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./volume/data:/data
+    restart: unless-stopped
+    ports:
+      - 8090:80
+    networks: []
+    depends_on: []
+networks: {}
