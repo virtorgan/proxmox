@@ -1,0 +1,12 @@
+version: "3.8"
+services:
+  lms:
+    container_name: logitech_media_server
+    image: doliana/logitech-media-server:latest
+    restart: unless-stopped
+    network_mode: host
+    volumes:
+      - /media/storage/Musique:/srv/music
+      - /home/daniel/volumes/lms:/srv/squeezebox
+      - /etc/localtime:/etc/localtime:ro
+networks: {}
