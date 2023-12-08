@@ -1,0 +1,18 @@
+version: "3.8"
+services:
+  influxdb:
+    restart: unless-stopped
+    ports:
+      - 8086:8086
+      - 8083:8083
+      - 2003:2003
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./volume:/var/lib/influxdb
+    env_file:
+      - ./influxdb.env
+    networks: []
+    depends_on: []
+    image: influxdb:1.8.10
+    environment: []
+networks: {}
