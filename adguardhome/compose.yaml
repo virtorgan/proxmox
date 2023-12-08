@@ -1,0 +1,15 @@
+version: "3.8"
+services:
+  adguardhome:
+    restart: unless-stopped
+    volumes:
+      - ./volumes/work:/opt/adguardhome/work
+      - ./volumes/conf:/opt/adguardhome/conf
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - 53:53/tcp
+      - 53:53/udp
+      - 8066:80/tcp
+      # - 3066:3000/tcp
+    image: adguard/adguardhome
+networks: {}
