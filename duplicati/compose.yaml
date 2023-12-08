@@ -1,0 +1,17 @@
+version: "3.8"
+services:
+  duplicati:
+    image: lscr.io/linuxserver/duplicati:latest
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=Europe/Paris
+      - CLI_ARGS= #optional
+    volumes:
+      - ./source:/source
+      - ./volumes/config:/config
+      - /mnt:/backups
+    ports:
+      - 8200:8200
+    restart: unless-stopped
+networks: {}
