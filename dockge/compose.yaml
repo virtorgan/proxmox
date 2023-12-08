@@ -1,0 +1,16 @@
+version: "3.8"
+services:
+  dockge:
+    image: louislam/dockge:1
+    restart: unless-stopped
+    ports:
+      # Host Port:Container Port
+      - 5001:5001
+    volumes:
+      - /run/docker.sock:/var/run/docker.sock
+      - ./data:/app/data
+      - /root/docker:/root/docker
+    environment:
+      # Tell Dockge where is your stacks directory
+      - DOCKGE_STACKS_DIR=/root/docker
+networks: {}
