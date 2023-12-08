@@ -1,0 +1,42 @@
+version: "3.8"
+services:
+  nginx-proxy-manager:
+    image: lepresidente/nginx-proxy-manager:latest
+    restart: unless-stopped
+    ports:
+      - 81:8181
+      - 80:8080
+      - 443:4443
+    environment:
+      TZ: Europe/Paris
+      DISABLE_IPV6: "1"
+    volumes:
+      - ./config:/config:rw
+      - ./templates:/templates:ro
+    networks:
+      crowdsec_proxy:
+        ipv4_address: 172.20.0.4
+  crowdsec:
+    image: crowdsecurity/crowdsec:latest
+    container_name: crowdsec
+    expose:
+      - 8080
+    environment:
+      PGID: "1000"
+    volumes:
+      - ./crowdsec-data:/var/lib/crowdsec/data
+      - ./crowdsec-config:/etc/crowdsec
+      - /var/log/secure:/var/log/secure:ro
+      - ./config/log:/var/log/nginx:ro
+      - ./vaultwarden-log:/var/log/vaultwarden:ro
+      - ./paperless-log:/var/log/paperless:ro
+    restart: unless-stopped
+    networks:
+      crowdsec_proxy:
+        ipv4_address: 172.20.0.6
+networks:
+  crowdsec_proxy:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.20.0.0/24
