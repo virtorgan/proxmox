@@ -1,0 +1,15 @@
+version: "3.8"
+services:
+  homepage:
+    restart: unless-stopped
+    ports:
+      - 3001:3000
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./volume/config:/app/config
+    environment: []
+    networks: []
+    depends_on: []
+    image: ghcr.io/gethomepage/homepage:latest
+networks: {}
