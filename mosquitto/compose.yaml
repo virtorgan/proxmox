@@ -1,0 +1,15 @@
+version: "3.8"
+services:
+  mosquitto:
+    restart: unless-stopped
+    ports:
+      - 1883:1883
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./data:/mosquitto/data
+      - ./log:/mosquitto/log
+    environment: []
+    networks: []
+    depends_on: []
+    image: eclipse-mosquitto
+networks: {}
