@@ -1,0 +1,18 @@
+version: "3.8"
+services:
+  nodered:
+    user: "0"
+    privileged: true
+    restart: unless-stopped
+    ports:
+      - 1880:1880
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+      - ./volume:/data
+      - /dev:/dev
+    environment: []
+    networks: []
+    depends_on: []
+    image: nodered/node-red
+networks: {}
